@@ -178,17 +178,21 @@ def run_script(timg, tdrw):
     pdb.gimp_layer_translate(layer_list[0], 0, set_height - layer_list[0].height)
     pdb.gimp_image_resize_to_layers(img)
 
-    # Get the height of the new image and set the difference of the height of the image and the height of the layer
-    new_height = pdb.gimp_image_height(img)
-    height_difference = new_height - layer_list[0].height
-
     # Get the list of offsets for the file
     offset_list = get_offsets(offset_path, len(image_paths))  # This is a list, len(offset_list) = len(layer_list)
 
     # Move each layer, based on the base layer's offset
-    base_layer_offset_x = offset_list[0][0]
-    base_layer_offset_y = offset_list[0][1]
+    bl_offset_x = offset_list[0][0]  # Base layer offset x
+    bl_offset_y = offset_list[0][1]  # Base layer offset y
 
+    for j in range(1, len(layer_list)):
+        pdb.gimp_layer_translate(layer_list[j], bl_offset_x - offset_list[j][0], abs(bl_offset_y - offset_list[j][1]))
+
+    pdb.gimp_image_resize_to_layers(img)
+
+    # Change the opacity of each layer except the base layer to 0%
+    for k in range(1, len(layer_list)):
+        pdb.gimp_layer_set_opacity(layer_list[k], 0.0)
 
 
 register(
