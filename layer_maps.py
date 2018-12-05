@@ -1,11 +1,8 @@
 #!/usr/bin/env python
 
 from gimpfu import *
-import sys
 import os
 import re
-
-sys.stdout = open('C:\\Users\\100062056\\Documents\\layer_maps.txt', 'w')
 
 
 class FilePathHandler:
@@ -128,10 +125,6 @@ def run_script(timg, tdrw):
 
     set_height = 3000
     set_width = 3000
-
-    # Value for center x, y coordinates (must be ints)
-    c_x = abs(orig_width - set_width) // 2
-    c_y = abs(orig_height - set_height) // 2
 
     # Resize the image canvas
     pdb.gimp_image_resize(img, set_width, set_height, 0, 0)
