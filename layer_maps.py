@@ -145,7 +145,12 @@ def run_script(timg, tdrw):
 
     # Check to see if there are any images, if not, display the problem and terminate the program
     if len(image_paths) == 0:
-        pdb.gimp_message("No additional .png map files found to overlay!")  # Change to message box
+        # Set the message handler and display the message
+        handler = pdb.gimp_message_get_handler()
+        pdb.gimp_message_set_handler(2)
+        pdb.gimp_message("No additional .png map files found to overlay!")
+        pdb.gimp_message_set_handler(handler)
+        pdb.gimp_image_resize_to_layers(img)  # Resize the canvas to fit the image
         return
 
     # Sort the .png files based on their lower level bound
