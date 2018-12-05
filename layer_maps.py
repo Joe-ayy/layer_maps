@@ -202,7 +202,7 @@ register(
     "Joey Harrison",
     "J.H.",
     "11/18",
-    "<Image>/Tools/Transform Tools/_Layer Maps",
+    "<Image>/Tools/Transform Tools/Map Cleanup/_Layer Maps",
     "RGB*, GRAY*",
     [],
     [],
