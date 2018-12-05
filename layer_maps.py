@@ -119,10 +119,7 @@ def run_script(timg, tdrw):
     img = gimp.image_list()[0]
     draw = pdb.gimp_image_get_active_drawable(img)
 
-    # Set the values for width and height of original image and also the "set" values
-    orig_height = pdb.gimp_image_height(img)
-    orig_width = pdb.gimp_image_width(img)
-
+    # Set the height and width of the canvas, which will be eventually resized
     set_height = 3000
     set_width = 3000
 
@@ -186,6 +183,9 @@ def run_script(timg, tdrw):
     # Change the opacity of each layer except the base layer to 0%
     for k in range(1, len(layer_list)):
         pdb.gimp_layer_set_opacity(layer_list[k], 0.0)
+
+    # Set the base layer to be the active layer
+    pdb.gimp_image_set_active_layer(img, layer_list[0])
 
 
 register(
